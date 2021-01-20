@@ -20,16 +20,16 @@ public class AudioHandler : MonoBehaviour
     private void ChangePitch(float target)
     {
         if(currentLerp != null) StopCoroutine(currentLerp);
-        currentLerp = StartCoroutine(PitchLerp(target, lerpDuration));
+        currentLerp = StartCoroutine(PitchLerp(target));
     }
 
-    private IEnumerator PitchLerp(float target, float duration)
+    private IEnumerator PitchLerp(float target)
     {
         float clock = 0;
         float origin = audioSource.pitch;
         while(clock < 1)
         {
-            clock += Time.deltaTime / duration;
+            clock += Time.deltaTime / lerpDuration;
             audioSource.pitch = Mathf.Lerp(origin, target, clock);
             yield return null;
         }
